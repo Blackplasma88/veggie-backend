@@ -82,4 +82,9 @@ class ItemController extends Controller
         $item = Item::findOrFail($id);
         $item->delete();
     }
+
+    public function searchName($name){
+        $item = Item::where('name',$name)->get();
+        return $item;
+    }
 }

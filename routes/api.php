@@ -21,5 +21,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('items',ItemController::class);
+Route::get('/search/{name}',[ItemController::class,'searchName']);
 
 Route::apiResource('orders',OrderController::class);
