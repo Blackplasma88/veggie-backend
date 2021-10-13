@@ -13,14 +13,14 @@ class ItemController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return ItemCollection|\Illuminate\Http\Response
      */
     public function index()
     {
-        // $items = Item::get();
-        $items = Item::paginate(10);    
-        // return $items;
-        // return ItemResource::collection($items);
+//        $items = Item::get();
+        $items = Item::paginate(Item::get()->count());
+//        return $items;
+//        return ItemResource::collection($items);
         return new ItemCollection($items);
     }
 
@@ -28,11 +28,17 @@ class ItemController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return Item|\Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        $item = new Item;
+        $item->name = $request->input('name');
+        $item->price = $request->input('price');
+        $item->inventories = $request->input('inventories');
+        $item->total_sales = $request->input('total_sales');
+        $item->save();
+        return $item;
     }
 
     /**
@@ -44,7 +50,7 @@ class ItemController extends Controller
     public function show(Item $item)
     {
         // return $item;
-        return new ItemResource($item); 
+        return new ItemResource($item);
     }
 
     /**
