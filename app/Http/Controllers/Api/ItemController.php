@@ -62,7 +62,7 @@ class ItemController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $item = Item::findOrFail($request->id);
+        $item = Item::findOrFail($id);
         $item->name = $request->name;
         $item->price = $request->price;
         $item->inventories = $request->inventories;
