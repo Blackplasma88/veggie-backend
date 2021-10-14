@@ -84,7 +84,6 @@ class ItemController extends Controller
     }
 
     public function searchName($name){
-        $item = Item::where('name',$name)->get();
-        return $item;
+        return Item::where('name','LIKE', '%'.$name.'%')->get();
     }
 }

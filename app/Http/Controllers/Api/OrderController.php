@@ -16,7 +16,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $items = Order::paginate(10);
+        $items = Order::paginate(Order::get()->count());
         return new OrderCollection($items);
     }
 
