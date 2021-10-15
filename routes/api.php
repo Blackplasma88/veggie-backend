@@ -21,8 +21,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+<<<<<<< HEAD
 Route::post('/register',[AuthController::class,'register']);
 Route::post('/login',[AuthController::class,'login']);
+=======
+Route::apiResource('items',ItemController::class);
+Route::get('/search/{name}',[ItemController::class,'searchName']);
+>>>>>>> origin/main
 
 Route::group(['middleware' => ['auth:sanctum']],function(){
     Route::apiResource('items',ItemController::class);

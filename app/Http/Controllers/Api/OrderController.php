@@ -16,7 +16,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $items = Order::paginate(10); 
+        $items = Order::paginate(Order::get()->count());
         return new OrderCollection($items);
     }
 
@@ -34,7 +34,7 @@ class OrderController extends Controller
         $order->amount = $request->amount;
         $order->status = $request->status;
         $order->save();
-        // return $order;
+         return $order;
     }
 
     /**
@@ -68,6 +68,7 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $order = Order::findOrFail($id);
+        $order->delete();
     }
 }

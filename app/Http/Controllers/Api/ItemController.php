@@ -13,14 +13,14 @@ class ItemController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return ItemCollection|\Illuminate\Http\Response
      */
     public function index()
     {
-        // $items = Item::get();
-        $items = Item::paginate(10);    
-        // return $items;
-        // return ItemResource::collection($items);
+//        $items = Item::get();
+        $items = Item::paginate(Item::get()->count());
+//        return $items;
+//        return ItemResource::collection($items);
         return new ItemCollection($items);
     }
 
@@ -28,7 +28,7 @@ class ItemController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return Item|\Illuminate\Http\Response
      */
     public function store(Request $request)
     {
@@ -50,7 +50,7 @@ class ItemController extends Controller
     public function show(Item $item)
     {
         // return $item;
-        return new ItemResource($item); 
+        return new ItemResource($item);
     }
 
     /**
@@ -62,7 +62,7 @@ class ItemController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $item = Item::findOrFail($request->id);
+        $item = Item::findOrFail($id);
         $item->name = $request->name;
         $item->price = $request->price;
         $item->inventories = $request->inventories;
@@ -79,6 +79,11 @@ class ItemController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $item = Item::findOrFail($id);
+        $item->delete();
+    }
+
+    public function searchName($name){
+        return Item::where('name','LIKE', '%'.$name.'%')->get();
     }
 }
