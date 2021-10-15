@@ -32,7 +32,13 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $item = new Item;
+        $item->name = $request->input('name');
+        $item->price = $request->input('price');
+        $item->inventories = $request->input('inventories');
+        $item->total_sales = $request->input('total_sales');
+        $item->save();
+        return $item;
     }
 
     /**
