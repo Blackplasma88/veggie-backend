@@ -3,22 +3,22 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\OrderCollection;
-use App\Http\Resources\OrderResource;
-use App\Models\Order;
+use App\Models\User;
+use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
-class OrderController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $orders = Order::paginate(Order::get()->count());
-        return new OrderCollection($orders);
+        $user = User::get();
+        return $user;
     }
 
     /**
@@ -29,13 +29,7 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        $order = new Order();
-        $order->user_id = $request->user_id;
-        $order->data = $request->data;
-        $order->amount = $request->amount;
-        $order->status = $request->status;
-        $order->save();
-         return $order;
+        //
     }
 
     /**
@@ -46,8 +40,8 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        $order = Order::findOrFail($id);
-        return new OrderResource($order);
+        $user = User::findOrFail($id);
+        return $user;
     }
 
     /**
@@ -59,10 +53,21 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $order = Order::findOrFail($id);
-        $order->status = $request->status;
-        $order->save();
-        return $order;
+        $user = User::findOrFail($id);
+        // $this->authorize('update',$user);
+        // $validator = Validator::make($request->all(),[
+        //     'name' => [
+        //         Rule::unique('apartments')->ignore($id),
+        //     ],
+        // ])->validate();
+
+        $user->balance_amount = $request->balance_amount;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->balance_amount = $request->balance_amount;
+        $user->role = $request->role;
+        $user->save();
+        return $user;
     }
 
     /**
@@ -73,7 +78,6 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
-        $order = Order::findOrFail($id);
-        $order->delete();
+        //
     }
 }

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ItemController;
 use App\Http\Controllers\Api\OrderController;
+use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,16 +22,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-<<<<<<< HEAD
 Route::post('/register',[AuthController::class,'register']);
 Route::post('/login',[AuthController::class,'login']);
-=======
-Route::apiResource('items',ItemController::class);
 Route::get('/search/{name}',[ItemController::class,'searchName']);
->>>>>>> origin/main
 
 Route::group(['middleware' => ['auth:sanctum']],function(){
+    Route::post('/logout',[AuthController::class,'logout']);
     Route::apiResource('items',ItemController::class);
     Route::apiResource('orders',OrderController::class);
-    Route::post('/logout',[AuthController::class,'logout']);
+    Route::apiResource('users',UserController::class);
 });
