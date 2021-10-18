@@ -69,6 +69,7 @@ class UserController extends Controller
         $user->address = $request->input('address');
         $user->balance_amount = $request->input('balance_amount');
         $user->tell = $request->input('tell');
+        $user->role = $request->input('role');
         $user->status = $request->input('status');
         $user->save();
         return $user;
@@ -82,6 +83,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
     }
 }
