@@ -21,6 +21,8 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->double('balance_amount')->default(0);
             $table->enum('role',['ADMIN','OFFICER','CUSTOMER'])->default('CUSTOMER');
+            $table->string('address')->nullable();
+            $table->string('tell');
             $table->rememberToken();
             $table->timestamps();
         });

@@ -13,7 +13,7 @@ class OrderController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return OrderCollection|\Illuminate\Http\Response
      */
     public function index(Request $request)
     {
@@ -25,7 +25,7 @@ class OrderController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return Order|\Illuminate\Http\Response
      */
     public function store(Request $request)
     {
@@ -35,14 +35,14 @@ class OrderController extends Controller
         $order->amount = $request->amount;
         $order->status = $request->status;
         $order->save();
-         return $order;
+        return $order;
     }
 
     /**
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return OrderResource|\Illuminate\Http\Response
      */
     public function show($id)
     {

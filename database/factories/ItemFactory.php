@@ -25,7 +25,7 @@ class ItemFactory extends Factory
             'name' => $this->faker->firstName(),
             'inventories' => $this->faker->numberBetween(10,100),
             'price' => $this->faker->numberBetween(5,20),
-            'total_sales' => $this->faker->numberBetween(1,10),
+            'total_sales' => $this->faker->numberBetween(0,0),
         ];
     }
 }

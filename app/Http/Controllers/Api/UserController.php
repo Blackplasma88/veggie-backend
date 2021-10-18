@@ -61,11 +61,10 @@ class UserController extends Controller
         //     ],
         // ])->validate();
 
-        $user->balance_amount = $request->balance_amount;
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->balance_amount = $request->balance_amount;
-        $user->role = $request->role;
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->address = $request->input('address');
+        $user->tell = $request->input('tell');
         $user->save();
         return $user;
     }
