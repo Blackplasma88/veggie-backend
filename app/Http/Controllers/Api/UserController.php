@@ -85,4 +85,17 @@ class UserController extends Controller
     {
         
     }
+
+    public function uploadImage(Request $request){
+        $item = User::findOrFail($request->id);
+        if($request->hasFile('img')){
+        $file = $request->file('img');
+        $fileName = time() . '.' . $file->getClientOriginalName();
+        $path = $file->move(public_path('images'), $fileName);
+        $photoURL = url('/images/'.$fileName);
+        $item->image_path = $photoURL;
+        $item->save();
+        return $item;
+        }
+    }
 }

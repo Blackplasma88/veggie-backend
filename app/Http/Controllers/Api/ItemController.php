@@ -99,11 +99,4 @@ class ItemController extends Controller
     public function searchName($name){
         return Item::where('name','LIKE', '%'.$name.'%')->get();
     }
-
-    public function downloadImage(Request $request){
-        $url = 'images/'.$request->image_path;
-        return response()->download(public_path('images/1634567914.pumpkin-ga7b56a52b_1280.png'),'Image');
-        // $url = 'images/'.$request->image_path;
-        // return response()->download(public_path($url),'Image');
-    }
 }
