@@ -33,6 +33,8 @@ class AuthController extends Controller
         $user->tell = $request->input('tell');
         $user->address = $request->input('address');
         $user->password = Hash::make($request->input("password"));
+        $user->balance_amount = $request->input('balance_amount');
+        $user->role = $request->input('role');
         $user->save();
 
         $token = $user->createToken('myapp')->plainTextToken;
