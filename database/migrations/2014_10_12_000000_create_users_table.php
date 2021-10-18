@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->enum('role',['ADMIN','OFFICER','CUSTOMER'])->default('CUSTOMER');
             $table->string('address')->nullable();
             $table->string('tell');
+            $table->string('status')->default('AUTHORIZE');
             $table->rememberToken();
             $table->timestamps();
         });
