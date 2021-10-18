@@ -16,7 +16,7 @@ class AuthController extends Controller
             'email' => 'required|email|unique:users',
             'password' => 'required|string|confirmed',
             'address' => ['string'],
-            'tell' => 'required|string'
+            'tell' => ['required', 'string', 'min:9', 'max:10', 'regex:/^0[0-9]{9}/']
         ]);
 
 //        $user = User::create([
@@ -59,6 +59,11 @@ class AuthController extends Controller
             return response([
                 'message' => 'Bad creds'
             ],401);
+        }
+        if($user->status === 'BAN'){
+            return response([
+                'message' => 'You are banned'
+            ],402);
         }
 
         $token = $user->createToken('myapp')->plainTextToken;
