@@ -30,6 +30,20 @@ class ItemController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return Item|\Illuminate\Http\Response
      */
+
+    public function uploadImage(Request $request){
+        $item = Item::findOrFail($request->id);
+            if($request->hasFile('img')){
+                $file = $request->file('img');
+                $fileName = time() . '.' . $file->getClientOriginalName();
+                $path = $file->move(public_path('images'), $fileName);
+                $photoURL = url('/images/'.$fileName);
+                $item->image_path = $photoURL;
+                $item->save();
+                return $item;
+            }
+    }
+
     public function store(Request $request)
     {
         $item = new Item;
@@ -37,6 +51,7 @@ class ItemController extends Controller
         $item->price = $request->input('price');
         $item->inventories = $request->input('inventories');
         $item->total_sales = $request->input('total_sales');
+        $item->image_path = $request->input('image_path');
         $item->save();
         return $item;
     }
@@ -83,5 +98,12 @@ class ItemController extends Controller
 
     public function searchName($name){
         return Item::where('name','LIKE', '%'.$name.'%')->get();
+    }
+
+    public function downloadImage(Request $request){
+        $url = 'images/'.$request->image_path;
+        return response()->download(public_path('images/1634567914.pumpkin-ga7b56a52b_1280.png'),'Image');
+        // $url = 'images/'.$request->image_path;
+        // return response()->download(public_path($url),'Image');
     }
 }

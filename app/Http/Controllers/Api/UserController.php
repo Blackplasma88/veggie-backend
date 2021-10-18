@@ -63,16 +63,13 @@ class UserController extends Controller
 
         $user->name = $request->input('name');
         $user->email = $request->input('email');
-<<<<<<< HEAD
         // $user->address = $request->input('address');
         // $user->tell = $request->input('tell');
         $user->role = $request->input('role');
-=======
         $user->address = $request->input('address');
         $user->balance_amount = $request->input('balance_amount');
         $user->tell = $request->input('tell');
         $user->status = $request->input('status');
->>>>>>> origin/main
         $user->save();
         return $user;
     }
