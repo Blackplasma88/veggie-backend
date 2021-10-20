@@ -23,6 +23,11 @@ class ItemController extends Controller
 //        return ItemResource::collection($items);
         return new ItemCollection($items);
     }
+    public function getToHome()
+    {
+        $items = Item::paginate(Item::get()->count());
+        return new ItemCollection($items);
+    }
 
     /**
      * Store a newly created resource in storage.

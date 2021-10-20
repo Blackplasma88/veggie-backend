@@ -28,6 +28,7 @@ Route::post('/login',[AuthController::class,'login']);
 Route::get('/item/search/{name}',[ItemController::class,'searchName']);
 Route::post('/item/upload-image',[ItemController::class,'uploadImage']);
 Route::post('/user/upload-image',[UserController::class,'uploadImage']);
+Route::get('/items/home',[ItemController::class,'getToHome']);
 
 Route::group(['middleware' => ['auth:sanctum']],function(){
     Route::post('/logout',[AuthController::class,'logout']);
